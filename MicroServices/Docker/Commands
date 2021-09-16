@@ -1,0 +1,158 @@
+Microsoft Windows [Version 10.0.19042.1165]
+(c) Microsoft Corporation. All rights reserved.
+
+C:\Users\Acer\Downloads>docker
+
+Usage:  docker [OPTIONS] COMMAND
+
+A self-sufficient runtime for containers
+
+Options:
+      --config string      Location of client config files (default
+                           "C:\\Users\\Acer\\.docker")
+  -c, --context string     Name of the context to use to connect to the
+                           daemon (overrides DOCKER_HOST env var and
+                           default context set with "docker context use")
+  -D, --debug              Enable debug mode
+  -H, --host list          Daemon socket(s) to connect to
+  -l, --log-level string   Set the logging level
+                           ("debug"|"info"|"warn"|"error"|"fatal")
+                           (default "info")
+      --tls                Use TLS; implied by --tlsverify
+      --tlscacert string   Trust certs signed only by this CA (default
+                           "C:\\Users\\Acer\\.docker\\ca.pem")
+      --tlscert string     Path to TLS certificate file (default
+                           "C:\\Users\\Acer\\.docker\\cert.pem")
+      --tlskey string      Path to TLS key file (default
+                           "C:\\Users\\Acer\\.docker\\key.pem")
+      --tlsverify          Use TLS and verify the remote
+  -v, --version            Print version information and quit
+
+Management Commands:
+  builder     Manage builds
+  buildx*     Build with BuildKit (Docker Inc., v0.6.1-docker)
+  compose*    Docker Compose (Docker Inc., v2.0.0-rc.2)
+  config      Manage Docker configs
+  container   Manage containers
+  context     Manage contexts
+  image       Manage images
+  manifest    Manage Docker image manifests and manifest lists
+  network     Manage networks
+  node        Manage Swarm nodes
+  plugin      Manage plugins
+  scan*       Docker Scan (Docker Inc., v0.8.0)
+  secret      Manage Docker secrets
+  service     Manage services
+  stack       Manage Docker stacks
+  swarm       Manage Swarm
+  system      Manage Docker
+  trust       Manage trust on Docker images
+  volume      Manage volumes
+
+Commands:
+  attach      Attach local standard input, output, and error streams to a running container
+  build       Build an image from a Dockerfile
+  commit      Create a new image from a container's changes
+  cp          Copy files/folders between a container and the local filesystem
+  create      Create a new container
+  diff        Inspect changes to files or directories on a container's filesystem
+  events      Get real time events from the server
+  exec        Run a command in a running container
+  export      Export a container's filesystem as a tar archive
+  history     Show the history of an image
+  images      List images
+  import      Import the contents from a tarball to create a filesystem image
+  info        Display system-wide information
+  inspect     Return low-level information on Docker objects
+  kill        Kill one or more running containers
+  load        Load an image from a tar archive or STDIN
+  login       Log in to a Docker registry
+  logout      Log out from a Docker registry
+  logs        Fetch the logs of a container
+  pause       Pause all processes within one or more containers
+  port        List port mappings or a specific mapping for the container
+  ps          List containers
+  pull        Pull an image or a repository from a registry
+  push        Push an image or a repository to a registry
+  rename      Rename a container
+  restart     Restart one or more containers
+  rm          Remove one or more containers
+  rmi         Remove one or more images
+  run         Run a command in a new container
+  save        Save one or more images to a tar archive (streamed to STDOUT by default)
+  search      Search the Docker Hub for images
+  start       Start one or more stopped containers
+  stats       Display a live stream of container(s) resource usage statistics
+  stop        Stop one or more running containers
+  tag         Create a tag TARGET_IMAGE that refers to SOURCE_IMAGE
+  top         Display the running processes of a container
+  unpause     Unpause all processes within one or more containers
+  update      Update configuration of one or more containers
+  version     Show the Docker version information
+  wait        Block until one or more containers stop, then print their exit codes
+
+Run 'docker COMMAND --help' for more information on a command.
+
+To get more help with docker, check out our guides at https://docs.docker.com/go/guides/
+
+C:\Users\Acer\Downloads>docker image ls
+REPOSITORY               TAG       IMAGE ID       CREATED         SIZE
+docker/getting-started   latest    083d7564d904   3 months ago    28MB
+nginx                    1.17.5    540a289bab6c   23 months ago   126MB
+
+C:\Users\Acer\Downloads>docker container ls -a
+CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES
+
+C:\Users\Acer\Downloads>docker run -it debian
+Unable to find image 'debian:latest' locally
+latest: Pulling from library/debian
+955615a668ce: Pull complete
+Digest: sha256:08db48d59c0a91afb802ebafc921be3154e200c452e4d0b19634b426b03e0e25
+Status: Downloaded newer image for debian:latest
+root@01af8bf2fcb6:/# pwd
+/
+root@01af8bf2fcb6:/# ls
+bin  boot  dev  etc  home  lib  lib64  media  mnt  opt  proc  root  run  sbin  srv  sys  tmp  usr  var
+root@01af8bf2fcb6:/# ^C
+root@01af8bf2fcb6:/# uname -a
+Linux 01af8bf2fcb6 5.10.16.3-microsoft-standard-WSL2 #1 SMP Fri Apr 2 22:23:49 UTC 2021 x86_64 GNU/Linux
+root@01af8bf2fcb6:/# exit
+exit
+
+C:\Users\Acer\Downloads>docker pull nginx:1.17.5
+1.17.5: Pulling from library/nginx
+Digest: sha256:922c815aa4df050d4df476e92daed4231f466acc8ee90e0e774951b0fd7195a4
+Status: Image is up to date for nginx:1.17.5
+docker.io/library/nginx:1.17.5
+
+C:\Users\Acer\Downloads>docker image ls
+REPOSITORY               TAG       IMAGE ID       CREATED         SIZE
+debian                   latest    82bd5ee7b1c5   13 days ago     124MB
+docker/getting-started   latest    083d7564d904   3 months ago    28MB
+nginx                    1.17.5    540a289bab6c   23 months ago   126MB
+
+C:\Users\Acer\Downloads>docker run --name my-nginx -d -p 8085:80 -v d:\docker-learn\html:/usr/share/nginx/html nginx:1.17.5
+244fa96eef97109e8be879dbf6abbac436e24177743ba40bbd42dc60de013f81
+
+C:\Users\Acer\Downloads>docker image ls
+REPOSITORY               TAG       IMAGE ID       CREATED         SIZE
+debian                   latest    82bd5ee7b1c5   13 days ago     124MB
+docker/getting-started   latest    083d7564d904   3 months ago    28MB
+nginx                    1.17.5    540a289bab6c   23 months ago   126MB
+
+C:\Users\Acer\Downloads>docker container ls
+CONTAINER ID   IMAGE          COMMAND                  CREATED          STATUS          PORTS                                   NAMES
+244fa96eef97   nginx:1.17.5   "nginx -g 'daemon of…"   33 seconds ago   Up 30 seconds   0.0.0.0:8085->80/tcp, :::8085->80/tcp   my-nginx
+
+C:\Users\Acer\Downloads>docker container ls -a
+CONTAINER ID   IMAGE          COMMAND                  CREATED          STATUS                          PORTS                                   NAMES
+244fa96eef97   nginx:1.17.5   "nginx -g 'daemon of…"   43 seconds ago   Up 39 seconds                   0.0.0.0:8085->80/tcp, :::8085->80/tcp   my-nginx
+01af8bf2fcb6   debian         "bash"                   3 minutes ago    Exited (0) About a minute ago                                           compassionate_matsumoto
+
+C:\Users\Acer\Downloads>docker start my-nginx
+my-nginx
+
+C:\Users\Acer\Downloads>docker stop my-nginx
+my-nginx
+
+C:\Users\Acer\Downloads>
