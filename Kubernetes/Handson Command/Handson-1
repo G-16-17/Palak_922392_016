@@ -1,0 +1,62 @@
+Microsoft Windows [Version 10.0.19042.1165]
+(c) Microsoft Corporation. All rights reserved.
+
+C:\Users\Acer>Kubectl version
+Client Version: version.Info{Major:"1", Minor:"22", GitVersion:"v1.22.0", GitCommit:"c2b5237ccd9c0f1d600d3072634ca66cefdf272f", GitTreeState:"clean", BuildDate:"2021-08-04T18:03:20Z", GoVersion:"go1.16.6", Compiler:"gc", Platform:"windows/amd64"}
+Unable to connect to the server: dial tcp [::1]:8080: connectex: No connection could be made because the target machine actively refused it.
+
+C:\Users\Acer>Minikube version
+minikube version: v1.23.0
+commit: 5931455374810b1bbeb222a9713ae2c756daee10
+
+C:\Users\Acer>minikube start --driver=docker
+* minikube v1.23.0 on Microsoft Windows 10 Pro 10.0.19042 Build 19042
+* Using the docker driver based on existing profile
+* Starting control plane node minikube in cluster minikube
+* Pulling base image ...
+! Executing "docker container inspect minikube --format={{.State.Status}}" took an unusually long time: 18.241414s
+* Restarting the docker service may improve performance.
+* docker "minikube" container is missing, will recreate.
+* Creating docker container (CPUs=2, Memory=2200MB) ...
+! StartHost failed, but will try again: recreate: creating host: create host timed out in 360.000000 seconds
+* Updating the running docker "minikube" container ...
+* Preparing Kubernetes v1.22.1 on Docker 20.10.8 ...
+  - Generating certificates and keys ...
+  - Booting up control plane ...
+  - Configuring RBAC rules ...
+* Verifying Kubernetes components...
+* Enabled addons: storage-provisioner, default-storageclass
+* Done! kubectl is now configured to use "minikube" cluster and "default" namespace by default
+
+C:\Users\Acer>Minikube status
+! Executing "docker container inspect minikube --format={{.State.Status}}" took an unusually long time: 11.8838142s
+* Restarting the docker service may improve performance.
+minikube
+type: Control Plane
+host: Running
+kubelet: Running
+apiserver: Running
+kubeconfig: Configured
+
+
+C:\Users\Acer>Minikube stop
+* Stopping node "minikube"  ...
+! Executing "docker container inspect minikube --format={{.State.Status}}" took an unusually long time: 7.8927245s
+* Restarting the docker service may improve performance.
+* Powering off "minikube" via SSH ...
+* 1 nodes stopped.
+
+C:\Users\Acer>Minikube status
+! Executing "docker container inspect minikube --format={{.State.Status}}" took an unusually long time: 19.38481s
+* Restarting the docker service may improve performance.
+E0917 14:46:00.970908    3832 status.go:258] status error: host: state: unknown state "minikube": context deadline exceeded
+E0917 14:46:00.970908    3832 status.go:261] The "minikube" host does not exist!
+minikube
+type: Control Plane
+host: Nonexistent
+kubelet: Nonexistent
+apiserver: Nonexistent
+kubeconfig: Nonexistent
+
+
+C:\Users\Acer>
