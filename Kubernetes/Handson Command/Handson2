@@ -1,0 +1,90 @@
+C:\Users\Acer\Desktop\DockerDemo>docker build -f Dockerfile -t docker-demo .
+[+] Building 5.6s (8/8) FINISHED
+ => [internal] load build definition from Dockerfile                                                               1.2s
+ => => transferring dockerfile: 31B                                                                                0.3s
+ => [internal] load .dockerignore                                                                                  0.9s
+ => => transferring context: 2B                                                                                    0.1s
+ => [internal] load metadata for docker.io/library/openjdk:8                                                       3.4s
+ => [auth] library/openjdk:pull token for registry-1.docker.io                                                     0.0s
+ => [internal] load build context                                                                                  0.4s
+ => => transferring context: 72B                                                                                   0.0s
+ => [1/2] FROM docker.io/library/openjdk:8@sha256:4af8aa613bcad1e9dd24978a9cec9e9fd9641a2789e12bfa3b49234da2b01b2  0.0s
+ => CACHED [2/2] ADD target/docker-demo.jar docker-demo.jar                                                        0.0s
+ => exporting to image                                                                                             0.6s
+ => => exporting layers                                                                                            0.0s
+ => => writing image sha256:0dc4dc7c1b2395f439ecf786ad2c553cbd1e644a45c692f6abde5c198d37300d                       0.1s
+ => => naming to docker.io/library/docker-demo                                                                     0.1s
+
+Use 'docker scan' to run Snyk tests against images to find vulnerabilities and learn how to fix them
+
+C:\Users\Acer\Desktop\DockerDemo>docker images
+REPOSITORY                    TAG       IMAGE ID       CREATED         SIZE
+docker-demo                   latest    0dc4dc7c1b23   1 hours ago     543MB
+gcr.io/k8s-minikube/kicbase   v0.0.26   b0c9ec980b3d   11 days ago     1.08GB
+nginx                         1.17.5    540a289bab6c   23 months ago   126MB
+
+C:\Users\Acer\Desktop\DockerDemo>docker tag docker-demo guna05/docker_demo
+
+C:\Users\Acer\Desktop\DockerDemo>docker push guna05/docker_demo
+Using default tag: latest
+The push refers to repository [docker.io/guna05/docker_demo]
+131af3192a8f: Pushed
+d9b6ea8e7d5f: Mounted from library/openjdk
+9cb5eb95298c: Mounted from library/openjdk
+00ef5416d927: Mounted from library/openjdk
+8555e663f65b: Mounted from library/openjdk
+d00da3cd7763: Mounted from library/openjdk
+4e61e63529c2: Mounted from library/openjdk
+799760671c38: Mounted from library/openjdk
+latest: digest: sha256:14d36763331d47f0af76a7f18a85e52532df04fd408d2f2770ed5357682cb627 size: 2007
+
+C:\Users\Acer\Desktop\DockerDemo>minikube start
+* minikube v1.23.0 on Microsoft Windows 10 Pro 10.0.19043 Build 19043
+* Using the docker driver based on existing profile
+* Starting control plane node minikube in cluster minikube
+* Pulling base image ...
+* Restarting existing docker container for "minikube" ...
+* Preparing Kubernetes v1.22.1 on Docker 20.10.8 ...
+* Verifying Kubernetes components...
+  - Using image gcr.io/k8s-minikube/storage-provisioner:v5
+* Enabled addons: storage-provisioner, default-storageclass
+* Done! kubectl is now configured to use "minikube" cluster and "default" namespace by default
+
+C:\Users\Acer\Desktop\DockerDemo>kubectl run handson --image guna05/docker_demo
+pod/handson created
+
+C:\Users\Acer\Desktop\DockerDemo>kubectl get pods
+NAME        READY   STATUS              RESTARTS   AGE
+first-pod   0/1     ImagePullBackOff    0          80m
+handson     0/1     ContainerCreating   0          18s
+webapp      0/1     ImagePullBackOff    0          55m
+
+C:\Users\Acer\Desktop\DockerDemo>kubectl get pods
+NAME        READY   STATUS              RESTARTS   AGE
+first-pod   0/1     ImagePullBackOff    0          80m
+handson     0/1     ContainerCreating   0          48s
+webapp      0/1     ImagePullBackOff    0          55m
+
+C:\Users\Acer\Desktop\DockerDemo>kubectl get pods
+NAME        READY   STATUS             RESTARTS   AGE
+first-pod   0/1     ImagePullBackOff   0          81m
+handson     1/1     Running            0          101s
+webapp      0/1     ImagePullBackOff   0          56m
+
+C:\Users\Acer\Desktop\DockerDemo>kubectl run handson1 --image guna05/docker_demo
+pod/handson1 created
+
+C:\Users\Acer\Desktop\DockerDemo>kubectl get pods
+NAME        READY   STATUS             RESTARTS   AGE
+first-pod   0/1     ImagePullBackOff   0          84m
+handson     1/1     Running            0          4m10s
+handson1    1/1     Running            0          21s
+webapp      0/1     ImagePullBackOff   0          59m
+
+C:\Users\Acer\Desktop\DockerDemo>kubectl port-forward handson 9090:8080
+Forwarding from 127.0.0.1:9090 -> 8080
+Forwarding from [::1]:9090 -> 8080
+Handling connection for 9090
+Handling connection for 9090
+Handling connection for 9090
+
